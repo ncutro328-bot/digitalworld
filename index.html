@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>how do you feel?</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: #faf0e6;
+  }
+  svg { width: 100vw; height: 100vh; display: block; }
+  a path {
+    transition: transform 0.4s ease, filter 0.4s ease;
+    cursor: pointer;
+  }
+  a:hover path {
+    transform: scale(1.03);
+    filter: brightness(1.1);
+  }
+</style>
+</head>
+<body>
+
+<svg id="svg" viewBox="0 0 1200 800"
+     xmlns="http://www.w3.org/2000/svg"></svg>
+
+<script>
+const NUM = 10;
+const COLORS = [
+  "#f4c7b7", // peach (love)
+  "#cad7e6", // light blue (calm)
+  "#e3d5f5", // lavender (sensitivity)
+  "#f8e9a1", // yellow (happiness)
+  "#7d8ab8", // dark blue (sadness)
+  "#799663", // olive (hopeful)
+  "#de4343", // deep red (anger)
+  "#7e78ac", // dark purple (tranquility)
+  "#dec7b5", // cream (apathy)
+  "#f5b06c"  // orange (excitement)
+];
+
+// Map colors to your own HTML pages
+const LINKS = COLORS.map(c => {
+  if (c === "#7d8ab8") return "sadness.html";
+  if (c === "#f4c7b7") return "love.html";
+  if (c === "#f5b06c") return "excitement.html";
+  if (c === "#7e78ac") return "tranquility.html";
+  if (c === "#cad7e6") return "calm.html";
+  if (c === "#e3d5f5") return "sensitivity.html";
+  if (c === "#f8e9a1") return "happiness.html";
+  if (c === "#799663") return "hopeful.html";
+  if (c === "#de4343") return "anger.html";
+  if (c === "#dec7b5") return "empathy.html";
+  return "placeholder.html"; // Other colors
+});
+
+const SPEED = 0.00015;
+const AMP = 40;
+const svg = document.getElementById("svg");
+const W = 1200, H = 800;
+
+function rand(min,max){ return Math.random()*(max-min)+min; }
+function lerp(a,b,t){ return a+(b-a)*t; }
+function smoothNoise(x,y){ return (Math.sin(x*0.8)+Math.cos(y*1.3))*0.5; }
+
+function clip(poly, p, q){
+  const n=[q[0]-p[0], q[1]-p[1]];
+  const mid=[(p[0]+q[0])/2,(p[1]+q[1])/2];
+  function side(pt){ return (pt[0]-mid[0])*n[0] + (pt[1]-mid[1])*n[1]; }
+  const out=[];
+  for(let i=0;i<poly.length;i++){
+    const a=poly[i], b=poly[(i+1)%poly.length];
+    const sa=side(a), sb=side(b);
+    if(sa<=0) out.push(a);
+    if(sa*sb<0){
+      const t=sa/(sa-sb);
+      out.push([lerp(a[0],b[0],t), lerp(a[1],b[1],t)]);
+    }
+  }
+  return out;
+}
+
+function chaikin(points, passes=2){
+  let pts=points;
+  for(let p=0;p<passes;p++){
+    const out=[];
+    for(let i=0;i<pts.length;i++){
+      const a=pts[i], b=pts[(i+1)%pts.length];
+      const q=[0.75*a[0]+0.25*b[0],0.75*a[1]+0.25*b[1]];
+      const r=[0.25*a[0]+0.75*b[0],0.25*a[1]+0.75*b[1]];
+      out.push(q,r);
+    }
+    pts=out;
+  }
+  return pts;
+}
+
+function toPath(pts){
+  if(!pts.length) return "";
+  let d=`M${pts[0][0].toFixed(2)} ${pts[0][1].toFixed(2)} `;
+  for(let i=1;i<pts.length;i++){
+    const prev=pts[i-1], cur=pts[i];
+    const mid=[(prev[0]+cur[0])/2,(prev[1]+cur[1])/2];
+    d+=`Q ${prev[0].toFixed(2)} ${prev[1].toFixed(2)} ${mid[0].toFixed(2)} ${mid[1].toFixed(2)} `;
+  }
+  const last=pts[pts.length-1], first=pts[0];
+  const midEnd=[(last[0]+first[0])/2,(last[1]+first[1])/2];
+  d+=`Q ${last[0].toFixed(2)} ${last[1].toFixed(2)} ${midEnd[0].toFixed(2)} ${midEnd[1].toFixed(2)} Z`;
+  return d;
+}
+
+// Create moving points
+const sites=[];
+for(let i=0;i<NUM;i++){
+  sites.push({
+    base:[rand(150,W-150), rand(150,H-150)],
+    pos:[0,0],
+    ox:Math.random()*1000,
+    oy:Math.random()*1000
+  });
+}
+
+// Create SVG blobs (clickable)
+const blobs=[];
+for(let i=0;i<NUM;i++){
+  const a=document.createElementNS(svg.namespaceURI,"a");
+  a.setAttribute("href",LINKS[i]);
+  a.setAttribute("target","_blank");
+  const path=document.createElementNS(svg.namespaceURI,"path");
+  path.setAttribute("fill",COLORS[i]);
+  a.appendChild(path);
+  svg.appendChild(a);
+  blobs.push(path);
+}
+
+function computeVoronoi(points){
+  const cells=[];
+  const bbox=[[-5,-5],[W+5,-5],[W+5,H+5],[-5,H+5]];
+  for(let i=0;i<points.length;i++){
+    let poly=bbox.map(p=>p.slice());
+    for(let j=0;j<points.length;j++){
+      if(i===j) continue;
+      poly=clip(poly, points[i], points[j]);
+      if(poly.length===0) break;
+    }
+    cells.push(poly);
+  }
+  return cells;
+}
+
+function animate(t){
+  for(let s of sites){
+    s.pos[0]=s.base[0]+smoothNoise(s.ox+t*SPEED,s.oy)*AMP;
+    s.pos[1]=s.base[1]+smoothNoise(s.ox+20,s.oy+t*SPEED)*AMP;
+  }
+  const pts=sites.map(s=>s.pos);
+  const cells=computeVoronoi(pts);
+  for(let i=0;i<cells.length;i++){
+    const smooth=chaikin(cells[i],2);
+    blobs[i].setAttribute("d",toPath(smooth));
+  }
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</script>
+
+</body>
+</html>
