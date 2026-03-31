@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>don't dream it's over</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #799663;
+      font-family: Apple Garamond, serif;
+      overflow: hidden;
+    }
+
+    /* Back button styling */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      z-index: 10;
+      color: #222;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .scatter-root {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .line {
+      position: absolute;
+      width: 500px;
+      font-size: 22px;
+      line-height: 1.6;
+      color: #222;
+      font-weight: 400;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .line:hover {
+      transform: scale(1.02);
+    }
+
+    @media (max-width: 540px) {
+      .line {
+        width: 90vw;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="history.back()">&#8592;</button>
+
+  <div class="scatter-root" id="scatterRoot">
+    <div class="line">There's a battle ahead, many battles are lost</div>
+    <div class="line">But you'll never see the end of the road while you're travelling with me</div>
+    <div class="line">Hey now, hey now</div>
+    <div class="line">Don't dream it's over</div>
+    <div class="line">When the world comes in, they come, they come</div>
+    <div class="line">To build a wall between us</div>
+    <div class="line">We know, they won't win</div>
+  </div>
+
+  <!-- Background song -->
+  <audio autoplay loop>
+    <source src="hopeful.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    // Scatter the lines around the viewport (same order)
+    const lines = document.querySelectorAll('.line');
+    const spacing = 70; // increased spacing
+    const padding = 40;
+
+    function scatterLines() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      let lastY = padding;
+
+      lines.forEach((line, i) => {
+        const left = Math.random() * (vw - 400 - padding);
+        const top = lastY + Math.random() * spacing;
+        line.style.left = `${left}px`;
+        line.style.top = `${top}px`;
+        lastY = top + spacing;
+      });
+    }
+
+    scatterLines();
+    window.addEventListener('resize', scatterLines);
+  </script>
+</body>
+</html>

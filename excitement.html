@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>excitement</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Apple Garamond, serif;
+      background-color: #f5b06c;
+      position: relative;
+    }
+
+    .container {
+      width: 500px;
+      text-align: center;
+      padding: 20px;
+      background-color: #f5b06c;
+      border-radius: 8px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+      color: #333;
+    }
+
+    .updated {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 25px;
+      color: #444;
+      line-height: 1.5;
+      text-align: justify;
+    }
+
+    /* Back button styling */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      color: #222;
+      z-index: 100;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background song -->
+  <audio autoplay loop>
+    <source src="excitement.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button class="back-button" onclick="history.back()">&#8592;</button>
+
+  <div class="container">
+    <h1></h1>
+    <p>n. an emotional state marked by enthusiasm, eagerness or anticipation, and general arousal.</p>
+  </div>
+</body>
+</html>

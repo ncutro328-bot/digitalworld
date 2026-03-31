@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>meditation for beginners</title>
+  <style>
+    body {
+      background-color: #7e78ac;
+      color: #ffffff;
+      font-family: Apple Garamond, serif;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    main {
+      max-width: 500px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .section-title {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    ul {
+      margin: 10px 0 20px 20px;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .small-note {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    audio {
+      display: none;
+    }
+
+    /* Back button styling */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      color: #ffffff;
+      cursor: pointer;
+      z-index: 1000;
+      transition: background-color 0.2s;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="history.back()">←</button>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="tranquility.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <main>
+    <h1>Meditation Routine for Beginners</h1>
+
+    <div class="section-title">Step 1: Preparation</div>
+    <ul>
+      <li>Find a quiet and comfortable space: This could be a chair, bed, or floor.</li>
+      <li>Set a timer: Start with 5–10 minutes for beginners.</li>
+      <li>Close your eyes: If you prefer, you can keep them open and focus on a fixed point.</li>
+    </ul>
+
+    <div class="section-title">Step 2: Focus on Your Breath</div>
+    <ul>
+      <li>Bring your attention to your breath: Notice the sensation of inhaling and exhaling.</li>
+      <li>Observe your breath without judgment: Simply follow the rise and fall of your chest or abdomen.</li>
+      <li>If your mind wanders, gently bring it back to your breath: This is normal, so don't get discouraged.</li>
+    </ul>
+
+    <div class="section-title">Step 3: Optional Techniques</div>
+    <ul>
+      <li>Body scan: Gradually scan your body from head to toe, noticing any sensations or tension.</li>
+      <li>Mantra: Repeat a calming word or phrase, such as "om" or "peace."</li>
+      <li>Guided meditation: Use a recorded or live meditation guide to lead you through the process.</li>
+    </ul>
+
+    <div class="section-title">Step 4: Ending the Meditation</div>
+    <ul>
+      <li>Take a few deep breaths: Allow your body to settle.</li>
+      <li>Open your eyes slowly: If you closed them earlier.</li>
+      <li>Take a moment to reflect: Notice how you feel and any insights gained.</li>
+    </ul>
+
+    <div class="section-title">Tips for Consistency</div>
+    <ul>
+      <li>Start small: Gradually increase your meditation time as you become more comfortable.</li>
+      <li>Meditate regularly: Aim for daily or weekly sessions.</li>
+      <li>Experiment with different techniques: Find what works best for you.</li>
+      <li>Be patient: Meditation is a skill that takes time to develop.</li>
+      <li>Don't give up: If you miss a session, don't get discouraged. Just get back on track when you can.</li>
+    </ul>
+
+    <div class="section-title">Additional Resources</div>
+    <ul>
+      <li><a href="#">Headspace</a> [50, 51]</li>
+      <li><a href="#">Calm</a> [52, 53]</li>
+      <li><a href="#">Insight Timer</a> [54, 55]</li>
+      <li><a href="#">YouTube meditation videos</a> [56, 57]</li>
+    </ul>
+  </main>
+
+  <script>
+    const audio = document.getElementById('bgMusic');
+
+    // Try to autoplay audio on page load
+    window.addEventListener('load', () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If autoplay with sound is blocked, try muted play and then unmute
+          audio.muted = true;
+          audio.play().then(() => {
+            setTimeout(() => {
+              audio.muted = false;
+            }, 1000);
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

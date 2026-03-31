@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>anger</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Apple Garamond, serif;
+      background-color: #de4343;
+      position: relative;
+    }
+
+    .container {
+      width: 500px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #222;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 25px;
+      color: #333;
+      line-height: 1.5;
+      text-align: justify;
+    }
+
+    /* Back button styling */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      color: #222;
+      z-index: 100;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="history.back()">&#8592;</button>
+
+  <!-- Background song -->
+  <audio autoplay loop>
+    <source src="anger.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+  
+  <div class="container">
+    <h1></h1>
+    <p>
+      n. an emotion characterized by tension and hostility arising from frustration, real or imagined injury by another, or perceived injustice. it can manifest itself in behaviors designed to remove the object of the anger (e.g., determined action) or behaviors designed merely to express the emotion (e.g., swearing). anger is distinct from, but a significant activator of, aggression, which is behavior intended to harm someone or something. despite their mutually influential relationship, anger is neither necessary nor sufficient for aggression to occur.
+    </p>
+  </div>
+</body>
+</html>

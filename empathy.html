@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>no excuses</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #dec7b5;
+      font-family: Apple Garamond, serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Back button styling */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      z-index: 100;
+      color: #111;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .quote {
+      position: absolute;
+      width: 500px;
+      max-width: 90%;
+      font-size: 30px;
+      line-height: 1.4;
+      color: #111;
+      transition: transform 0.3s;
+      text-align: center;
+    }
+
+    .quote:hover {
+      transform: scale(1.05);
+    }
+
+    .credit {
+      position: absolute;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="history.back()">&#8592;</button>
+
+  <p class="quote">“Hands are bruised from breaking rocks all day”</p>
+  <p class="quote">“You, my friend, I will defend / And if we change, well I love you anyway”</p>
+
+  <!-- Background song -->
+  <audio autoplay loop>
+    <source src="empathy.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const quotes = document.querySelectorAll('.quote');
+    const padding = 20;
+    const spacing = 200;
+
+    function scatterQuotes() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      let lastY = padding;
+
+      quotes.forEach((quote, i) => {
+        const left = Math.random() * (vw - quote.offsetWidth - padding);
+        const top = lastY + Math.random() * spacing;
+        quote.style.left = `${left}px`;
+        quote.style.top = `${top}px`;
+        lastY = top + spacing;
+      });
+    }
+
+    scatterQuotes();
+    window.addEventListener('resize', scatterQuotes);
+  </script>
+</body>
+</html>

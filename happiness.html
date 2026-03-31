@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>take it easy</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Apple Garamond, serif;
+      background-color: #f8e9a1;
+    }
+
+    /* Circle back button */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.5);
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      z-index: 100;
+      color: #333;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .container {
+      width: 500px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #222;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 25px;
+      color: #333;
+      line-height: 1.5;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Circle back button -->
+  <button class="back-button" onclick="history.back()">&#8592;</button>
+
+  <!-- Hidden audio element -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="take-it-easy.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="container">
+    <h1></h1>
+    <p>
+      Happiness comes now and then,<br>
+      We cannot be sure just when.<br>
+      But when it's there, enjoy each hour<br>
+      Because happiness has such power,<br>
+      Joy to you it will bring<br>
+      Even make someone else sing.<br>
+      What peace of mind happiness can show<br>
+      Making you and others glow,<br>
+      Nurture it, make it last<br>
+      Forget the troubles of the past.<br>
+      Never fear that it will go<br>
+      for it could always grow<br>
+      and then tomorrow there it will be,<br>
+      For happiness can set you free.
+    </p>
+  </div>
+
+  <script>
+    // Try to auto-play audio on page load (some browsers block this)
+    const audio = document.getElementById('bgMusic');
+
+    window.addEventListener('load', () => {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // If autoplay with sound is blocked, try muted play then unmute
+          audio.muted = true;
+          audio.play().then(() => {
+            setTimeout(() => {
+              audio.muted = false;
+            }, 1000);
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>please</title>
+  <style>
+    body {
+      background-color: #7d8ab8;
+      font-family: Apple Garamond, serif;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* Back button styling */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+      z-index: 100;
+      color: #222;
+    }
+
+    .back-button:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .lyrics {
+      width: 500px;
+      max-width: 90%;
+      line-height: 1.6;
+      font-size: 25px;
+      white-space: pre-line;
+      margin-bottom: 40px;
+    }
+
+    audio {
+      width: 300px;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <button class="back-button" onclick="history.back()">&#8592;</button>
+
+  <div class="lyrics">
+Good times for a change
+See, the luck I've had
+Can make a good man turn bad
+So, please, please, please
+Let me, let me, let me
+Let me get what I want this time
+Haven't had a dream in a long time
+See, the life I've had
+Can make a good man bad
+So, for once in my life
+Let me get what I want
+Lord knows, it would be the first time
+Lord knows, it would be the first time
+  </div>
+
+  <!-- Background song -->
+  <audio autoplay loop>
+    <source src="sadness.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>

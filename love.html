@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>love you</title>
+  <style>
+    body {
+      background-color: #f4c7b7;
+      font-family: Minion Variable Concept, serif;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      color: #333;
+    }
+
+    .quote {
+      position: absolute;
+      width: 400px;
+      line-height: 1.4;
+      opacity: 0;
+      transform-origin: center;
+      animation: fadeIn 1.5s ease forwards, float 6s ease-in-out infinite;
+      padding: 12px 16px;
+      border-radius: 20px;
+      background-color: #f2f2f2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(var(--rotation)); }
+      50% { transform: translateY(-8px) rotate(calc(var(--rotation) + 1deg)); }
+    }
+
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: #f2f2f2;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeInButton 1.5s ease forwards, floatButton 6s ease-in-out infinite;
+      animation-delay: 0.8s;
+      transition: background-color 0.2s ease;
+    }
+
+    .back-button:hover {
+      background-color: #e0e0e0;
+    }
+
+    @keyframes fadeInButton {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatButton {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Background song -->
+  <audio autoplay loop>
+    <source src="love.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button class="back-button" onclick="history.back()">←</button>
+
+  <div class="quote" style="--rotation: -2deg; top: 5%; left: 8%; font-size: 19px; animation-delay: 0s;">
+    you’re doing so great with everything lamby very proud of you
+  </div>
+
+  <div class="quote" style="--rotation: 4deg; top: 17%; left: 55%; font-size: 22px; animation-delay: 0.5s;">
+    You’re the best thing that has ever happened to me
+  </div>
+
+  <div class="quote" style="--rotation: -6deg; top: 30%; left: 10%; font-size: 26px; animation-delay: 1s;">
+    Pupaaaaaa!!!!
+  </div>
+
+  <div class="quote" style="--rotation: 1deg; top: 42%; left: 50%; font-size: 17px; animation-delay: 1.5s;">
+    Our minds are sooooo connected lol
+  </div>
+
+  <div class="quote" style="--rotation: -3deg; top: 55%; left: 12%; font-size: 18px; animation-delay: 2s;">
+    no it’s perfect just the way it is lamby great job
+  </div>
+
+  <div class="quote" style="--rotation: 5deg; top: 67%; left: 55%; font-size: 23px; animation-delay: 2.5s;">
+    awesome lamby!!! congratulations
+  </div>
+
+  <div class="quote" style="--rotation: -5deg; top: 75%; left: 15%; font-size: 20px; animation-delay: 3s;">
+    Ur amazingggg
+  </div>
+
+  <div class="quote" style="--rotation: 3deg; top: 85%; left: 50%; font-size: 21px; animation-delay: 3.5s;">
+    Ur my wife bruh
+  </div>
+
+  <div class="quote" style="--rotation: -2deg; top: 92%; left: 10%; font-size: 18px; animation-delay: 4s;">
+    Ok just wanted to make sure u r ok
+  </div>
+</body>
+</html>
